@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="{% url 'home' %}">
+      <h1>Le shopRoom</h1>
+    </a>
+    {% if user.is_authenticated %}
+        <p> Loged name: {{ user.username }}</p>
+        <a href="{% url 'logout' %}"> Se deconnecté</a>
+    {% else %}
+        <a href="{% url 'signup' %}"> S'inscrire</a>
+        <a href="{% url 'login' %}"> Se connecté</a>
+    {% endif %}
+    <p> Loged: {{ user.is_authenticated }}</p>
+
+    {% block content %}
+        <h3>Vide</h3>
+    {% endblock %}
+  </body>
+</html>

@@ -16,7 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from store.views import home, article_detail, ajout_au_panier
+from django.conf.urls.static import static
+from shop import settings
+from accounts.views import signup, logout_user, login_user
 
 urlpatterns = [
+    path('', home, name="home"),
+    path('signup/', signup, name="signup"),
+    path('logout/', logout_user, name="logout"),
+    path('login/', login_user, name="login"),
+    path('article/<str:slug>/', article_detail, name="article_detail"),
+    path('article/<str:slug>/ajout-au-panier/', ajout_au_panier, name="ajout-au-panier"),
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
